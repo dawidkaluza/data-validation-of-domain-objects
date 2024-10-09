@@ -1,13 +1,13 @@
-package pl.dkaluza.spring_validation;
+package pl.dkaluza.validation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringValidationApplication {
+public class ValidationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringValidationApplication.class, args);
+		SpringApplication.run(ValidationApplication.class, args);
 	}
 
 }

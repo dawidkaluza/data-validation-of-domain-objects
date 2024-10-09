@@ -1,10 +1,10 @@
-package pl.dkaluza.spring_validation;
+package pl.dkaluza.validation;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringValidationApplicationTests {
+class ValidationApplicationTests {
 
 	@Test
 	void contextLoads() {
