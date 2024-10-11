@@ -3,8 +3,17 @@ package pl.dkaluza.validation.domain;
 public class Photo {
     private final String url;
 
-    public Photo(String url) {
+    private Photo(String url) {
         this.url = url;
+    }
+
+    static Factory<Photo> newFactory(String url) {
+        return new DefaultFactory<>(
+            () -> new Photo(url),
+            ValidationExecutor.of(
+                Validator.of(url != null && !url.isBlank(), "url", "Url must not be blank")
+            )
+        );
     }
 
     public String getUrl() {

@@ -9,13 +9,12 @@ public class GalleryService {
     private static final Logger logger = LoggerFactory.getLogger(GalleryService.class);
 
     public Gallery create(CreateGalleryCommand command) {
-        var gallery = new Gallery(
-            command.title(),
-            command.photos()
-                .stream()
-                .map(Photo::new)
-                .toList()
-        );
+        var gallery = Gallery.builder()
+            .name(command.name())
+            .photos(command.photos())
+            .prepare()
+            .produce();
+
         logger.info("Creating new gallery: {}", gallery);
         return gallery;
     }
