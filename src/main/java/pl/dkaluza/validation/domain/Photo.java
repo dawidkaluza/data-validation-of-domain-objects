@@ -1,9 +1,15 @@
 package pl.dkaluza.validation.domain;
 
+import java.util.List;
+
 public class Photo {
     private final String url;
 
     public Photo(String url) {
+        if (url == null || url.isBlank()) {
+            throw new ValidationException(List.of(new FieldError("url", "url must not be blank")));
+        }
+
         this.url = url;
     }
 

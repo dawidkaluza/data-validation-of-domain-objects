@@ -1,12 +1,26 @@
 package pl.dkaluza.validation.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gallery {
     private final String name;
     private final List<Photo> photos;
 
-    public Gallery(String name, List<Photo> photos) {
+    public Gallery(String name, List<Photo> photos) throws ValidationException {
+        var errors = new ArrayList<FieldError>();
+        if (name == null || name.isBlank()) {
+            errors.add(new FieldError("name", "Name must not be blank"));
+        }
+
+        if (photos == null || photos.isEmpty()) {
+            errors.add(new FieldError("photos", "Photos must not be empty"));
+        }
+
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+
         this.name = name;
         this.photos = photos;
     }
