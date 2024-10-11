@@ -3,8 +3,11 @@ package pl.dkaluza.validation.domain;
 import java.util.List;
 
 public class ValidationException extends RuntimeException {
-    public ValidationException(List<FieldError> fieldErrors) {
-        super(buildMessage(fieldErrors));
+    private final List<FieldError> errors;
+
+    public ValidationException(List<FieldError> errors) {
+        super(buildMessage(errors));
+        this.errors = errors;
     }
 
     private static String buildMessage(List<FieldError> fieldErrors) {
