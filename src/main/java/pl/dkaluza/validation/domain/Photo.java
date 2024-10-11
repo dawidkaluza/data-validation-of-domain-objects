@@ -5,7 +5,7 @@ import java.util.List;
 public class Photo {
     private final String url;
 
-    public Photo(String url) {
+    public Photo(String url) throws ValidationException {
         if (url == null || url.isBlank()) {
             throw new ValidationException(List.of(new FieldError("url", "url must not be blank")));
         }
