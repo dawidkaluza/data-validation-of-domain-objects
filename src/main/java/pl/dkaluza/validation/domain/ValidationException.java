@@ -22,4 +22,8 @@ public class ValidationException extends RuntimeException {
         }
         return builder.toString();
     }
+
+    public List<FieldError> getErrors() {
+        return errors;
+    }
 }
