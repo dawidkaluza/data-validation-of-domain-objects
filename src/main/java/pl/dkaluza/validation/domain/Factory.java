@@ -12,10 +12,21 @@ public abstract class Factory<T> {
         isReviewed = false;
     }
 
+    /**
+     * Performs validation on given object and returns list of errors.
+     */
     protected abstract List<FieldError> validate();
 
+    /**
+     * Instantiates and returns given object.
+     */
     protected abstract T assemble();
 
+    /**
+     * Checks if given object is valid.
+     * First call runs validation, caches the results and returns them.
+     * Next calls just return the cached results.
+     */
     public List<FieldError> review() {
         if (isReviewed) {
             return errors;
@@ -26,6 +37,11 @@ public abstract class Factory<T> {
         return Collections.unmodifiableList(errors);
     }
 
+    /**
+     * Reviews object (via review method) if it hasn't been done yet.
+     * If errors were found during the review, validation exception is thrown.
+     * Otherwise, object is assembled (via assemble method) and returned.
+     */
     public T produce() throws ValidationException {
         if (!isReviewed) {
             review();

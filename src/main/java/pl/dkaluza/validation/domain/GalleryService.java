@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class GalleryService {
     private static final Logger logger = LoggerFactory.getLogger(GalleryService.class);
 
-    public Gallery create(CreateGalleryCommand command) {
+    public Gallery create(CreateGalleryCommand command) throws ValidationException {
         var gallery = Gallery.builder()
             .name(command.name())
             .photos(command.photos())
