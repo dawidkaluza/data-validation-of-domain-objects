@@ -69,12 +69,13 @@ public class Gallery {
         }
 
         public Factory<Gallery> prepare() {
-            var titleFactory = new DefaultFactory<>(
-                () -> title,
+            var galleryValidatingFactory = DefaultFactory.newValidatingFactory(
                 ValidationExecutor.of(
-                    Validator.of(title != null && !title.isBlank(), "title", "Title must not be empty")
+                    Validator.of(title != null && !title.isBlank(), "title", "Title must not be blank"),
+                    Validator.of(!photos.isEmpty(), "photos", "Photos must not be empty")
                 )
             );
+
             var photoFactories = photos.stream().map(Photo::newFactory).toList();
             var photosListFactory = new FactoriesComposite<>(
                 () -> photoFactories.stream().map(Factory::assemble).toList(),
@@ -82,10 +83,10 @@ public class Gallery {
             );
             return new FactoriesComposite<>(
                 () -> new Gallery(
-                    titleFactory.assemble(),
+                    title,
                     photosListFactory.assemble()
                 ),
-                titleFactory, photosListFactory
+                galleryValidatingFactory, photosListFactory
             );
         }
     }

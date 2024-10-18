@@ -11,6 +11,15 @@ class DefaultFactory<T> extends Factory<T> {
         this.validationExecutor = validationExecutor;
     }
 
+    public static Factory<?> newValidatingFactory(ValidationExecutor validationExecutor) {
+        return new DefaultFactory<>(
+            () -> {
+                throw new UnsupportedOperationException("This is validating factory, not supposed to be used for assembling.");
+            },
+            validationExecutor
+        );
+    }
+
     @Override
     protected List<FieldError> validate() {
         return validationExecutor.validate();
