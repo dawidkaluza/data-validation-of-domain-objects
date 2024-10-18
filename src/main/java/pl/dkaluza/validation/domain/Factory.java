@@ -38,15 +38,12 @@ public abstract class Factory<T> {
     }
 
     /**
-     * Reviews object (via review method) if it hasn't been done yet.
+     * Reviews object (via review method).
      * If errors were found during the review, validation exception is thrown.
      * Otherwise, object is assembled (via assemble method) and returned.
      */
     public T produce() throws ValidationException {
-        if (!isReviewed) {
-            review();
-        }
-
+        var errors = review();
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
