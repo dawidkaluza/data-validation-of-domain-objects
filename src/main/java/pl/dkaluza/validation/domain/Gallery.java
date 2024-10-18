@@ -69,7 +69,7 @@ public class Gallery {
         }
 
         public Factory<Gallery> prepare() {
-            var nameFactory = new DefaultFactory<>(
+            var titleFactory = new DefaultFactory<>(
                 () -> title,
                 ValidationExecutor.of(
                     Validator.of(title != null && !title.isBlank(), "title", "Title must not be empty")
@@ -82,10 +82,10 @@ public class Gallery {
             );
             return new FactoriesComposite<>(
                 () -> new Gallery(
-                    nameFactory.assemble(),
+                    titleFactory.assemble(),
                     photosListFactory.assemble()
                 ),
-                nameFactory, photosListFactory
+                titleFactory, photosListFactory
             );
         }
     }
