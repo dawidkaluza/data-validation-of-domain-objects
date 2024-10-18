@@ -46,15 +46,15 @@ public class Gallery {
     }
 
     public static class Builder {
-        private String name;
+        private String title;
         private List<String> photos;
 
         public Builder() {
             photos = new ArrayList<>();
         }
 
-        public Builder name(String name) {
-            this.name = name;
+        public Builder title(String title) {
+            this.title = title;
             return this;
         }
 
@@ -70,9 +70,9 @@ public class Gallery {
 
         public Factory<Gallery> prepare() {
             var nameFactory = new DefaultFactory<>(
-                () -> name,
+                () -> title,
                 ValidationExecutor.of(
-                    Validator.of(name != null && !name.isBlank(), "name", "Name must not be empty")
+                    Validator.of(title != null && !title.isBlank(), "title", "Title must not be empty")
                 )
             );
             var photoFactories = photos.stream().map(Photo::newFactory).toList();

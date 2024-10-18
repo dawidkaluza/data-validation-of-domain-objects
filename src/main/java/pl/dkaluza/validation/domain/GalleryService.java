@@ -10,7 +10,7 @@ public class GalleryService {
 
     public Gallery create(CreateGalleryCommand command) throws ValidationException {
         var gallery = Gallery.builder()
-            .name(command.name())
+            .title(command.title())
             .photos(command.photos())
             .prepare()
             .produce();
