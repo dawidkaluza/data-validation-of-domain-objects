@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gallery {
-    private final String name;
+    private final String title;
     private final List<Photo> photos;
 
-    private Gallery(String name, List<Photo> photos) {
-        this.name = name;
+    public Gallery(String title, List<Photo> photos) {
+        this.title = title;
         this.photos = photos;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public List<Photo> getPhotos() {
@@ -29,19 +29,19 @@ public class Gallery {
         if (this == o) return true;
         if (!(o instanceof Gallery gallery)) return false;
 
-        return name.equals(gallery.name);
+        return title.equals(gallery.title);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return title.hashCode();
     }
 
     @Override
     public String toString() {
         return "Gallery{" +
                "photos=" + photos +
-               ", name='" + name + '\'' +
+               ", title='" + title + '\'' +
                '}';
     }
 
